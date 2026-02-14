@@ -1,73 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For My Iffu ❤️</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+*{margin:0;padding:0;box-sizing:border-box;}
 
 body{
+font-family:'Poppins',sans-serif;
 background:#000;
 color:#fff;
-overflow-x:hidden;
 scroll-behavior:smooth;
+overflow-x:hidden;
 }
 
-/* Cinematic Loader */
-#loader{
+/* Star canvas */
+#stars{
 position:fixed;
-width:100%;
-height:100vh;
-background:#000;
-display:flex;
-justify-content:center;
-align-items:center;
-z-index:9999;
-flex-direction:column;
-}
-
-#loader h1{
-font-family:'Playfair Display',serif;
-font-size:2.5rem;
-animation:fadeIn 2s ease infinite alternate;
-}
-
-@keyframes fadeIn{
-from{opacity:0.3;}
-to{opacity:1;}
-}
-
-/* Star background */
-.stars{
-position:fixed;
+top:0;
+left:0;
 width:100%;
 height:100%;
-background:url('https://www.transparenttextures.com/patterns/stardust.png');
-animation:moveStars 60s linear infinite;
 z-index:-1;
-}
-
-@keyframes moveStars{
-from{background-position:0 0;}
-to{background-position:1000px 1000px;}
 }
 
 /* Sections */
 section{
-min-height:100vh;
+height:100vh;
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-padding:40px;
+padding:30px;
 text-align:center;
 opacity:0;
 transform:translateY(40px);
-transition:1.2s ease;
+transition:1s ease;
 }
 
 section.show{
@@ -77,64 +49,32 @@ transform:translateY(0);
 
 h1{
 font-family:'Playfair Display',serif;
-font-size:2.8rem;
+font-size:2rem;
 margin-bottom:20px;
 }
 
-.glow{
-background:linear-gradient(90deg,#ff4e50,#f9d423,#ff4e50);
--webkit-background-clip:text;
-color:transparent;
-animation:shine 3s linear infinite;
+p{
+max-width:320px;
+line-height:1.7;
+font-size:1rem;
+opacity:0.9;
 }
 
-@keyframes shine{
-0%{background-position:0%}
-100%{background-position:200%}
-}
-
-/* Glass card */
-.card{
-background:rgba(255,255,255,0.05);
-backdrop-filter:blur(15px);
-padding:30px;
-border-radius:25px;
-box-shadow:0 0 40px rgba(255,255,255,0.1);
-}
-
-/* Gallery */
-.gallery{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-gap:20px;
-max-width:800px;
-}
-
-.gallery img{
-width:100%;
+img{
+max-width:90%;
 border-radius:20px;
-transition:0.5s;
+box-shadow:0 15px 40px rgba(0,0,0,0.6);
 }
 
-.gallery img:hover{
-transform:scale(1.05);
-}
-
-/* Buttons */
 button{
-padding:12px 30px;
+margin-top:20px;
+padding:12px 25px;
 border:none;
-border-radius:40px;
+border-radius:30px;
 background:white;
 color:black;
 font-weight:600;
-cursor:pointer;
-margin:10px;
-transition:0.3s;
-}
-
-button:hover{
-transform:scale(1.1);
+font-size:0.9rem;
 }
 
 /* Popup */
@@ -145,162 +85,272 @@ left:50%;
 transform:translate(-50%,-50%) scale(0);
 background:white;
 color:black;
-padding:60px;
-border-radius:30px;
-font-size:2.5rem;
+padding:40px;
+border-radius:25px;
+font-size:1.6rem;
 font-weight:700;
-transition:0.6s ease;
+transition:0.5s;
 z-index:999;
 text-align:center;
+width:80%;
+max-width:350px;
 }
 
 #popup.show{
 transform:translate(-50%,-50%) scale(1);
 }
 
-/* Cursor heart trail */
-.trail{
-position:fixed;
-font-size:16px;
-pointer-events:none;
-animation:trailFade 1s forwards;
-}
-@keyframes trailFade{
-to{opacity:0;transform:translateY(-20px);}
-}
-
 /* Petals */
 .petal{
 position:fixed;
 top:-20px;
-font-size:24px;
+font-size:22px;
 animation:fall 4s linear forwards;
 }
 @keyframes fall{
-to{transform:translateY(100vh) rotate(360deg);}
+to{transform:translateY(110vh) rotate(360deg);}
 }
+
 </style>
 </head>
 
 <body>
 
-<div id="loader">
-<h1>Loading Something Beautiful For Iffu… ❤️</h1>
-</div>
-
-<div class="stars"></div>
+<canvas id="stars"></canvas>
 
 <audio id="music" loop>
 <source src="song.mp3" type="audio/mpeg">
 </audio>
 
-<!-- INTRO -->
+<!-- 1 -->
 <section>
-<h1 class="glow" id="name">Ifrah • Iffu • My Bivi ✨</h1>
-<p>This is not just a website.  
-It’s every effort, every late night, every heartbeat… made only for you.</p>
-<button onclick="start()">Enter Our World ❤️</button>
+<h1>Ifrah ❤️ My Iffu ❤️ My Bivi</h1>
+<p>Under this sky full of stars…  
+there is only one person I see.</p>
+<button onclick="startMusic()">Tap Slowly 💖</button>
 </section>
 
-<!-- VALENTINE WEEK -->
+<!-- 2 -->
 <section>
-<div class="card">
-<h1>Everything I Built For You</h1>
-<p>From Rose Day to Promise Day —  
-every page had one purpose: your smile.</p>
-<div class="gallery">
-<img src="rose.jpg">
-<img src="propose.jpg">
-<img src="hug.jpg">
-<img src="promise.jpg">
-<img src="kiss.jpg">
-</div>
-</div>
+<h1>Happy Valentine’s Day ❤️</h1>
+<p>Today isn’t special because of the date.  
+It’s special because I have you.</p>
 </section>
 
-<!-- MEMORIES -->
+<!-- 3 -->
 <section>
-<h1>Our Beautiful Moments</h1>
-<div class="gallery">
+<h1>This Day Is Yours</h1>
+<p>Every word.  
+Every line.  
+Every heartbeat here is yours.</p>
+</section>
+
+<!-- 4 -->
+<section>
+<h1>How It Started</h1>
+<p>One simple conversation changed my world forever.</p>
+</section>
+
+<!-- 5 IMAGE -->
+<section>
 <img src="pic1.jpg">
-<img src="pic2.jpg">
-<img src="pic3.jpg">
-<img src="pic4.jpg">
-<img src="pic5.jpg">
-</div>
 </section>
 
-<!-- FINAL QUESTION -->
+<!-- 6 -->
 <section>
-<h1>One Last Question 💍</h1>
-<p>Will you stay mine in every lifetime?</p>
+<h1>Your Smile</h1>
+<p>The first time you smiled at me…  
+I felt something settle in my heart.</p>
+</section>
+
+<!-- 7 IMAGE -->
+<section>
+<img src="pic2.jpg">
+</section>
+
+<!-- 8 -->
+<section>
+<h1>You Feel Like Home</h1>
+<p>Not a place.  
+Not walls.  
+But comfort and safety.</p>
+</section>
+
+<!-- 9 IMAGE -->
+<section>
+<img src="pic3.jpg">
+</section>
+
+<!-- 10 -->
+<section>
+<h1>You Changed Me</h1>
+<p>You made me softer. Kinder. Better.</p>
+</section>
+
+<!-- 11 IMAGE -->
+<section>
+<img src="pic4.jpg">
+</section>
+
+<!-- 12 -->
+<section>
+<h1>When I Think About Forever</h1>
+<p>I don’t imagine luxury.  
+I imagine you.</p>
+</section>
+
+<!-- 13 IMAGE -->
+<section>
+<img src="pic5.jpg">
+</section>
+
+<!-- 14 -->
+<section>
+<h1>If You Ever Doubt</h1>
+<p>Please come back to this page and remember:  
+You are deeply loved.</p>
+</section>
+
+<!-- 15 -->
+<section>
+<h1>I Choose You</h1>
+<p>On good days.  
+On bad days.  
+Always.</p>
+</section>
+
+<!-- 16 -->
+<section>
+<h1>My Bivi</h1>
+<p>You are my peace after chaos.</p>
+</section>
+
+<!-- 17 -->
+<section>
+<h1>Iffu</h1>
+<p>You are my soft place to land.</p>
+</section>
+
+<!-- 18 -->
+<section>
+<h1>Ifrah</h1>
+<p>You are my destiny written beautifully.</p>
+</section>
+
+<!-- 19 -->
+<section>
+<h1>Happy Valentine’s Day Again ❤️</h1>
+<p>I would choose you in every lifetime.</p>
+</section>
+
+<!-- 20 -->
+<section>
+<h1>One Last Question...</h1>
+<p>I need to ask you something important.</p>
+</section>
+
+<!-- 21 -->
+<section>
+<h1>Will You Stay With Me Forever? 💍</h1>
 <button onclick="yesClicked()">Yes ❤️</button>
 <button id="noBtn">No 🙈</button>
 </section>
 
-<div id="popup">I LOVE YOU SO MUCH ❤️ IFFU</div>
+<!-- 22 -->
+<section>
+<h1>If You Said Yes...</h1>
+<p>Scroll slowly…</p>
+</section>
+
+<!-- 23 -->
+<section>
+<h1>Then This Is Forever.</h1>
+<p>And I promise to protect this love.</p>
+</section>
+
+<!-- 24 -->
+<section>
+<h1>Under These Stars</h1>
+<p>It will always be you and me.</p>
+</section>
+
+<!-- 25 -->
+<section>
+<h1>I LOVE YOU SO MUCH ❤️</h1>
+<p>Forever, Iffu.</p>
+</section>
+
+<div id="popup">I LOVE YOU FOREVER IFFU ❤️</div>
 
 <script>
 
-/* Loader */
-window.onload=()=>setTimeout(()=>document.getElementById("loader").style.display="none",2000);
+/* Star Background Animation */
+const canvas=document.getElementById("stars");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let stars=[];
+for(let i=0;i<120;i++){
+stars.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+radius:Math.random()*1.5,
+speed:Math.random()*0.5
+});
+}
+
+function animateStars(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+ctx.fillStyle="white";
+stars.forEach(s=>{
+ctx.beginPath();
+ctx.arc(s.x,s.y,s.radius,0,Math.PI*2);
+ctx.fill();
+s.y+=s.speed;
+if(s.y>canvas.height) s.y=0;
+});
+requestAnimationFrame(animateStars);
+}
+animateStars();
+
+/* Music */
+function startMusic(){
+document.getElementById("music").play();
+}
 
 /* Scroll reveal */
 const sections=document.querySelectorAll("section");
 window.addEventListener("scroll",()=>{
 sections.forEach(sec=>{
-if(sec.getBoundingClientRect().top<window.innerHeight-100){
+if(sec.getBoundingClientRect().top<window.innerHeight-80){
 sec.classList.add("show");
 }
 });
-});
-
-/* Music */
-function start(){
-document.getElementById("music").play();
-}
-
-/* Cursor trail */
-document.addEventListener("mousemove",e=>{
-let heart=document.createElement("div");
-heart.className="trail";
-heart.innerHTML="❤️";
-heart.style.left=e.pageX+"px";
-heart.style.top=e.pageY+"px";
-document.body.appendChild(heart);
-setTimeout(()=>heart.remove(),1000);
 });
 
 /* Runaway No */
 let noBtn=document.getElementById("noBtn");
 noBtn.addEventListener("mouseover",()=>{
 noBtn.style.position="absolute";
-noBtn.style.left=Math.random()*80+"%";
-noBtn.style.top=Math.random()*80+"%";
+noBtn.style.left=Math.random()*70+"%";
+noBtn.style.top=Math.random()*70+"%";
 });
 
-/* YES click */
+/* YES explosion */
 function yesClicked(){
 document.getElementById("popup").classList.add("show");
 
-for(let i=0;i<40;i++){
-let petal=document.createElement("div");
-petal.className="petal";
-petal.innerHTML="🌸";
-petal.style.left=Math.random()*100+"vw";
-document.body.appendChild(petal);
-setTimeout(()=>petal.remove(),4000);
+for(let i=0;i<60;i++){
+let p=document.createElement("div");
+p.className="petal";
+p.innerHTML="🌸";
+p.style.left=Math.random()*100+"vw";
+document.body.appendChild(p);
+setTimeout(()=>p.remove(),4000);
 }
 }
 
-/* Secret Page (tap name 5 times) */
-let count=0;
-document.getElementById("name").addEventListener("click",()=>{
-count++;
-if(count===5){
-alert("Secret unlocked ❤️ You are my forever, Iffu.");
-}
-});
 </script>
 
 </body>
