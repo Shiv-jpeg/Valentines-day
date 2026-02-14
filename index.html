@@ -14,9 +14,11 @@ body{
 font-family:'Poppins',sans-serif;
 background:#000;
 color:#fff;
-overflow:hidden;
+scroll-behavior:smooth;
+overflow-x:hidden;
 }
 
+/* Star Canvas */
 #stars{
 position:fixed;
 top:0;
@@ -72,7 +74,6 @@ border-radius:30px;
 background:white;
 color:black;
 font-weight:600;
-font-size:0.9rem;
 cursor:pointer;
 }
 
@@ -91,8 +92,6 @@ font-weight:700;
 transition:0.4s ease;
 z-index:999;
 text-align:center;
-width:80%;
-max-width:350px;
 opacity:0;
 }
 
@@ -123,72 +122,51 @@ to{transform:translateY(110vh) rotate(360deg);}
 <source src="song.mp3" type="audio/mpeg">
 </audio>
 
-<!-- 1 -->
+<!-- PAGE 1 -->
 <section>
 <h1>Ifrah ❤️ My Iffu ❤️ My Bivi</h1>
 <p>Under this sky full of stars… there is only one person I see.</p>
 <button id="startBtn">Tap Slowly 💖</button>
 </section>
 
-<!-- 2 -->
+<!-- PAGE 2 -->
 <section>
 <h1>Happy Valentine’s Day ❤️</h1>
 <p>Today isn’t special because of the date. It’s special because I have you.</p>
 </section>
 
-<!-- 3 -->
+<!-- PAGE 3 -->
 <section>
 <h1>This Day Is Yours</h1>
 <p>Every word. Every line. Every heartbeat here is yours.</p>
 </section>
 
-<!-- 4 -->
+<!-- PAGE 4 -->
 <section>
 <h1>How It Started</h1>
 <p>One simple conversation changed my world forever.</p>
 </section>
 
+<!-- IMAGE PAGES -->
 <section><img src="pic1.jpg"></section>
-
-<section>
-<h1>Your Smile</h1>
-<p>The first time you smiled at me… I felt something settle in my heart.</p>
-</section>
-
+<section><h1>Your Smile</h1><p>The first time you smiled at me… I felt something settle in my heart.</p></section>
 <section><img src="pic2.jpg"></section>
-
-<section>
-<h1>You Feel Like Home</h1>
-<p>Not a place. Not walls. But comfort and safety.</p>
-</section>
-
+<section><h1>You Feel Like Home</h1><p>Not a place. Not walls. But comfort.</p></section>
 <section><img src="pic3.jpg"></section>
-
-<section>
-<h1>You Changed Me</h1>
-<p>You made me softer. Kinder. Better.</p>
-</section>
-
+<section><h1>You Changed Me</h1><p>You made me softer. Kinder. Better.</p></section>
 <section><img src="pic4.jpg"></section>
-
-<section>
-<h1>When I Think About Forever</h1>
-<p>I don’t imagine luxury. I imagine you.</p>
-</section>
-
+<section><h1>When I Think About Forever</h1><p>I imagine you.</p></section>
 <section><img src="pic5.jpg"></section>
 
+<!-- Emotional Build -->
 <section><h1>If You Ever Doubt</h1><p>You are deeply loved.</p></section>
 <section><h1>I Choose You</h1><p>On good days. On bad days. Always.</p></section>
-<section><h1>My Bivi</h1><p>You are my peace after chaos.</p></section>
-<section><h1>Iffu</h1><p>You are my soft place to land.</p></section>
-<section><h1>Ifrah</h1><p>You are my destiny written beautifully.</p></section>
+<section><h1>My Bivi</h1><p>You are my peace.</p></section>
+<section><h1>Iffu</h1><p>You are my comfort.</p></section>
+<section><h1>Ifrah</h1><p>You are my destiny.</p></section>
+<section><h1>Happy Valentine’s Day Again ❤️</h1><p>I would choose you in every lifetime.</p></section>
 
-<section>
-<h1>Happy Valentine’s Day Again ❤️</h1>
-<p>I would choose you in every lifetime.</p>
-</section>
-
+<!-- Proposal -->
 <section>
 <h1>One Last Question...</h1>
 <p>I need to ask you something important.</p>
@@ -213,8 +191,13 @@ to{transform:translateY(110vh) rotate(360deg);}
 /* STAR BACKGROUND */
 const canvas=document.getElementById("stars");
 const ctx=canvas.getContext("2d");
+
+function resizeCanvas(){
 canvas.width=window.innerWidth;
 canvas.height=window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener("resize",resizeCanvas);
 
 let stars=[];
 for(let i=0;i<120;i++){
@@ -239,7 +222,6 @@ if(s.y>canvas.height) s.y=0;
 requestAnimationFrame(animateStars);
 }
 animateStars();
-
 
 /* MUSIC + AUTO SCROLL */
 const music=document.getElementById("music");
@@ -271,7 +253,7 @@ clearInterval(fade);
 function startAutoScroll(){
 autoScrollInterval=setInterval(()=>{
 currentSection++;
-if(currentSection < sections.length-6){
+if(currentSection < sections.length-5){
 sections[currentSection].scrollIntoView({behavior:"smooth"});
 }else{
 clearInterval(autoScrollInterval);
@@ -288,7 +270,7 @@ sec.classList.add("show");
 });
 }
 window.addEventListener("scroll",revealOnScroll);
-
+revealOnScroll();
 
 /* Runaway No */
 let noBtn=document.getElementById("noBtn");
