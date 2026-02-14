@@ -14,11 +14,9 @@ body{
 font-family:'Poppins',sans-serif;
 background:#000;
 color:#fff;
-scroll-behavior:smooth;
-overflow-x:hidden;
+overflow:hidden;
 }
 
-/* Star background */
 #stars{
 position:fixed;
 top:0;
@@ -90,15 +88,17 @@ padding:40px;
 border-radius:25px;
 font-size:1.6rem;
 font-weight:700;
-transition:0.5s;
+transition:0.4s ease;
 z-index:999;
 text-align:center;
 width:80%;
 max-width:350px;
+opacity:0;
 }
 
 #popup.show{
 transform:translate(-50%,-50%) scale(1);
+opacity:1;
 }
 
 /* Petals */
@@ -148,7 +148,6 @@ to{transform:translateY(110vh) rotate(360deg);}
 <p>One simple conversation changed my world forever.</p>
 </section>
 
-<!-- IMAGE PAGES -->
 <section><img src="pic1.jpg"></section>
 
 <section>
@@ -179,38 +178,17 @@ to{transform:translateY(110vh) rotate(360deg);}
 
 <section><img src="pic5.jpg"></section>
 
-<!-- Emotional Build Up -->
-<section>
-<h1>If You Ever Doubt</h1>
-<p>You are deeply loved.</p>
-</section>
-
-<section>
-<h1>I Choose You</h1>
-<p>On good days. On bad days. Always.</p>
-</section>
-
-<section>
-<h1>My Bivi</h1>
-<p>You are my peace after chaos.</p>
-</section>
-
-<section>
-<h1>Iffu</h1>
-<p>You are my soft place to land.</p>
-</section>
-
-<section>
-<h1>Ifrah</h1>
-<p>You are my destiny written beautifully.</p>
-</section>
+<section><h1>If You Ever Doubt</h1><p>You are deeply loved.</p></section>
+<section><h1>I Choose You</h1><p>On good days. On bad days. Always.</p></section>
+<section><h1>My Bivi</h1><p>You are my peace after chaos.</p></section>
+<section><h1>Iffu</h1><p>You are my soft place to land.</p></section>
+<section><h1>Ifrah</h1><p>You are my destiny written beautifully.</p></section>
 
 <section>
 <h1>Happy Valentine’s Day Again ❤️</h1>
 <p>I would choose you in every lifetime.</p>
 </section>
 
-<!-- Proposal -->
 <section>
 <h1>One Last Question...</h1>
 <p>I need to ask you something important.</p>
@@ -223,31 +201,16 @@ to{transform:translateY(110vh) rotate(360deg);}
 <button id="noBtn">No 🙈</button>
 </section>
 
-<section>
-<h1>If You Said Yes...</h1>
-<p>Scroll slowly…</p>
-</section>
-
-<section>
-<h1>Then This Is Forever.</h1>
-<p>And I promise to protect this love.</p>
-</section>
-
-<section>
-<h1>Under These Stars</h1>
-<p>It will always be you and me.</p>
-</section>
-
-<section>
-<h1>I LOVE YOU SO MUCH ❤️</h1>
-<p>Forever, Iffu.</p>
-</section>
+<section><h1>If You Said Yes...</h1><p>Scroll slowly…</p></section>
+<section><h1>Then This Is Forever.</h1><p>And I promise to protect this love.</p></section>
+<section><h1>Under These Stars</h1><p>It will always be you and me.</p></section>
+<section><h1>I LOVE YOU SO MUCH ❤️</h1><p>Forever, Iffu.</p></section>
 
 <div id="popup">I LOVE YOU FOREVER IFFU ❤️</div>
 
 <script>
 
-/* Star Background Animation */
+/* STAR BACKGROUND */
 const canvas=document.getElementById("stars");
 const ctx=canvas.getContext("2d");
 canvas.width=window.innerWidth;
@@ -259,7 +222,7 @@ stars.push({
 x:Math.random()*canvas.width,
 y:Math.random()*canvas.height,
 radius:Math.random()*1.5,
-speed:Math.random()*0.5
+speed:Math.random()*0.4
 });
 }
 
@@ -277,15 +240,21 @@ requestAnimationFrame(animateStars);
 }
 animateStars();
 
-/* iOS Safe Music */
+
+/* MUSIC + AUTO SCROLL */
 const music=document.getElementById("music");
 music.volume=0;
+
+const sections=document.querySelectorAll("section");
+let currentSection=0;
+let autoScrollInterval;
 
 document.getElementById("startBtn").addEventListener("click",function(){
 music.play().then(()=>{
 fadeInMusic();
 this.innerText="Playing... ❤️";
 this.disabled=true;
+startAutoScroll();
 });
 });
 
@@ -299,15 +268,27 @@ clearInterval(fade);
 },200);
 }
 
-/* Scroll reveal */
-const sections=document.querySelectorAll("section");
-window.addEventListener("scroll",()=>{
+function startAutoScroll(){
+autoScrollInterval=setInterval(()=>{
+currentSection++;
+if(currentSection < sections.length-6){
+sections[currentSection].scrollIntoView({behavior:"smooth"});
+}else{
+clearInterval(autoScrollInterval);
+}
+},3000);
+}
+
+/* Reveal */
+function revealOnScroll(){
 sections.forEach(sec=>{
 if(sec.getBoundingClientRect().top<window.innerHeight-80){
 sec.classList.add("show");
 }
 });
-});
+}
+window.addEventListener("scroll",revealOnScroll);
+
 
 /* Runaway No */
 let noBtn=document.getElementById("noBtn");
@@ -317,11 +298,14 @@ noBtn.style.left=Math.random()*70+"%";
 noBtn.style.top=Math.random()*70+"%";
 });
 
-/* YES explosion */
+/* YES */
 function yesClicked(){
-document.getElementById("popup").classList.add("show");
+clearInterval(autoScrollInterval);
 
-for(let i=0;i<60;i++){
+const popup=document.getElementById("popup");
+popup.classList.add("show");
+
+for(let i=0;i<70;i++){
 let p=document.createElement("div");
 p.className="petal";
 p.innerHTML="🌸";
@@ -329,6 +313,10 @@ p.style.left=Math.random()*100+"vw";
 document.body.appendChild(p);
 setTimeout(()=>p.remove(),4000);
 }
+
+setTimeout(()=>{
+popup.classList.remove("show");
+},5000);
 }
 
 </script>
